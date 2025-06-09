@@ -1,0 +1,8 @@
+.login-form {
+    /* Example: add a subtle animation */
+    animation: fadeIn 0.8s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(32px);}
+    to { opacity: 1; transform: translateY(0);}
+  }

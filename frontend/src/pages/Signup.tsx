@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { register } from '../services/auth';
+import './Signup.css';
 
 const Signup = () => {
   const [form, setForm] = useState({ name: '', email: '', password: '', interests: '' });
@@ -17,13 +18,51 @@ const Signup = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="name" placeholder="Name" onChange={handleChange} required />
-      <input name="email" placeholder="Email" onChange={handleChange} required />
-      <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
-      <input name="interests" placeholder="Interests (comma separated)" onChange={handleChange} />
-      <button type="submit">Sign Up</button>
-      <p>{message}</p>
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white rounded-xl shadow-lg p-8 flex flex-col gap-6 signup-form"
+    >
+      <h2 className="text-2xl font-bold text-center mb-2">Sign Up</h2>
+      <input
+        name="name"
+        placeholder="Name"
+        onChange={handleChange}
+        required
+        className="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      />
+      <input
+        name="email"
+        type="email"
+        placeholder="Email"
+        onChange={handleChange}
+        required
+        className="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      />
+      <input
+        name="password"
+        type="password"
+        placeholder="Password"
+        onChange={handleChange}
+        required
+        className="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      />
+      <input
+        name="interests"
+        placeholder="Interests (comma separated)"
+        onChange={handleChange}
+        className="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      />
+      <button
+        type="submit"
+        className="bg-green-500 text-white rounded-lg py-2 font-semibold hover:bg-green-600 transition"
+      >
+        Sign Up
+      </button>
+      {message && (
+        <p className="text-green-700 bg-green-100 border border-green-300 rounded-lg p-3 text-center">
+          {message}
+        </p>
+      )}
     </form>
   );
 };

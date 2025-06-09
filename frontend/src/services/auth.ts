@@ -1,35 +1,54 @@
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+import axios from "axios";
 
-export async function register(data: { name: string; email: string; password: string; interests: string[] }) {
-  const res = await fetch(`${API_URL}/auth/register`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  });
-  return res.json();
-}
+const API_URL = "http://localhost:5001/api";
 
-export async function login(data: { email: string; password: string }) {
-  const res = await fetch(`${API_URL}/auth/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  });
-  return res.json();
-}
+// Register a new user
+export const register = async (data: {
+  name: string;
+  email: string;
+  password: string;
+  interests: string[];
+}) => {
+  try {
+    const res = await axios.post(`${API_URL}/auth/register`, data);
+    return res.data;
+  } catch (err: any) {
+    return err.response?.data || { msg: "Registration failed" };
+  }
+};
 
-export async function getProfile(token: string) {
-  const res = await fetch(`${API_URL}/user/me`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return res.json();
-}
+// Login user
+export const login = async (data: { email: string; password: string }) => {
+  try {
+    const res = await axios.post(`${API_URL}/auth/login`, data);
+    return res.data;
+  } catch (err: any) {
+    return err.response?.data || { msg: "Login failed" };
+  }
+};
 
-export async function updateProfile(token: string, data: { name: string; interests: string[] }) {
-  const res = await fetch(`${API_URL}/user/me`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-    body: JSON.stringify(data),
-  });
-  return res.json();
-}
+// Get user profile (requires JWT token in localStorage)
+export const getProfile = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    const res = await axios.get(`${API_URL}/user/me`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.data;
+  } catch (err: any) {
+    return err.response?.data || { msg: "Unable to fetch profile" };
+  }
+};
+
+// Update user profile (requires JWT)
+export const updateProfile = async (data: { name: string; interests: string[] }) => {
+  try {
+    const token = localStorage.getItem("token");
+    const res = await axios.put(`${API_URL}/user/me`, data, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.data;
+  } catch (err: any) {
+    return err.response?.data || { msg: "Profile update failed" };
+  }
+};
