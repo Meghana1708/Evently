@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../services/auth';
-import './Login.css'; // Custom styles
+import './Login.css';
 
-const Login = () => {
+export default function Login() {
   const [form, setForm] = useState({ email: '', password: '' });
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const Login = () => {
     e.preventDefault();
     const res = await login(form);
     if (res.token) {
-      localStorage.setItem('token', res.token);
+      localStorage.setItem('token', res.token); // <--- This is crucial
       setMessage('');
       navigate('/profile');
     } else {
@@ -59,6 +59,4 @@ const Login = () => {
       )}
     </form>
   );
-};
-
-export default Login;
+}

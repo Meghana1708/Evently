@@ -1,12 +1,17 @@
 import React from "react";
+import type { ReactElement } from "react";
 import { BrowserRouter as Router, Routes, Route, Link, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 
-const token = localStorage.getItem("token");
+// Updated type here:
+function PrivateRoute({ element }: { element: ReactElement }) {
+  const token = localStorage.getItem("token");
+  return token ? element : <Navigate to="/login" replace />;
+}
 
-function App() {
+export default function App() {
   return (
     <Router>
       <nav className="flex gap-8 items-center px-8 py-4 bg-white shadow-md">
@@ -15,13 +20,13 @@ function App() {
         <Link to="/profile" className="text-lg font-semibold text-gray-700 hover:text-blue-600 transition">Profile</Link>
       </nav>
       <div className="flex justify-center mt-12">
-        <div className="w-full max-w-md">
+        <div className="w-full max-w-xl">
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route
+            <Route 
               path="/profile"
-              element={token ? <Profile /> : <Navigate to="/login" />}
+              element={<PrivateRoute element={<Profile />} />}
             />
             <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
@@ -30,4 +35,3 @@ function App() {
     </Router>
   );
 }
-export default App;

@@ -1,4 +1,14 @@
-.profile-card {
-    box-shadow: 0 6px 28px 0 rgba(59, 130, 246, 0.14);
-    border-left: 4px solid #3b82f6;
+.profile-card-creative {
+    box-shadow: 0 8px 32px 0 rgba(59, 130, 246, 0.18);
+    border-left: 6px solid #a21caf;
+    position: relative;
+    overflow: visible;
+  }
+  .profile-avatar {
+    box-shadow: 0 4px 24px 0 #3b82f6cc, 0 0px 0px 4px #fff;
+    background: #fff;
+  }
+  .text-evently {
+    color: #a21caf;
+    letter-spacing: 0.02em;
   }

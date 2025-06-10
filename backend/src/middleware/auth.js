@@ -6,7 +6,7 @@ function auth(req, res, next) {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded.id;
+    req.user = { id: decoded.id }; // IMPORTANT: set as object
     next();
   } catch (e) {
     res.status(400).json({ msg: 'Token is not valid' });
