@@ -1,5 +1,4 @@
-# Evently
-## *Where every event finds its crowd.*
+# Evently - ` where every event finds its crowd. `
 
 Evently is a modern, full-stack event management application with robust authentication, user profiles, and seamless feature-driven development workflow. This project follows best practices in Git and GitHub branching, making it easy to collaborate, track features, and maintain code quality.
 
@@ -134,7 +133,6 @@ We welcome contributions!
 - [Sanidhya Singh](https://github.com/ssanidhya0407)
 - [Kakarlapudi Meghana](https://github.com/Meghana1708)
 
----
 ---
 
 ## 💡 License
